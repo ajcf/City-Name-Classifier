@@ -1,0 +1,80 @@
+
+/**
+ * Feature.java
+ *
+ * Stores counts and computes probabilities for one boolean feature,
+ * usually the presence or absence of a string in a larger string.
+ */
+public class Feature {
+
+ /* counts[][] is a 2x2 matrix that stores for each of the
+  * 2 classes (0 and 1), the number of training examples we've
+  * seen that don't have the feature (0) or have it (1).
+  *
+  * So counts[0][0] would be the number of training examples that fall
+  * into class 0 that don't have the feature.
+  *
+  * totalPerClass[] stores the number of training examples we've seen
+  * per class.  So totalPerClass[i] should always equal
+  * counts[i][0] + counts[i][1].
+  * 
+  * toMatch is the String representing the feature itself.
+  */
+ private int[][] counts = new int[2][2];
+ private int[] totalPerClass = new int[2];
+ private String toMatch;
+
+ public Feature(String toMatch) {
+  this.toMatch = toMatch;
+ }
+
+ public int isFeaturePresent(String s) {
+
+   if(s.contains(toMatch)) return 1;
+   
+  /* YOUR CODE HERE
+   *
+   * Determine whether this feature occurs in the string.
+   * Return 1 if the feature is present; 0 otherwise.
+   */
+  
+  return 0; // OK to remove this line when writing method
+ }
+
+ public void addTrainingExample(int featurePresence, int classNumber) {
+   counts[classNumber][featurePresence]++;
+   totalPerClass[classNumber] = counts[classNumber][0] + counts[classNumber][1];
+   
+  /* YOUR CODE HERE
+   *
+   * Given the absence/presence of this feature for the given class,
+   * update the counts array and the totalPerClass array.
+   *
+   * classNumber = the number of the class for this example (0 or 1)
+   * featurePresence = 0 or 1 stating the presence or absence of this feature
+   */
+ }
+
+ public double getProbOfFeatureGivenClass(int featurePresence, int classNumber) {
+   double presCount = (double)counts[classNumber][1];
+   double absCount = (double)counts[classNumber][0];
+   double goalCount = (double)counts[classNumber][featurePresence];
+   return (1+goalCount)/(2+presCount+absCount);
+  /* YOUR CODE HERE
+   *
+   * What is the probability of this feature being absent/present for this class?
+   * Compute this using counts and totalPerClass, 
+   * but make sure to smooth the result so that probabilities of zero or one
+   * are avoided.  
+   * 
+   * HINT A: You should do smoothing by adding 1 to the counts in the right
+   * parts of the calculation.
+   * 
+   * HINT B: You're returning a probability as a double between 0 and 1.  
+   * But remember that dividing two integers in Java always results in an integer...
+   */
+
+  //return 0; // OK to remove this line when writing method
+  
+ }
+}

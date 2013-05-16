@@ -1,0 +1,20 @@
+1. When we tested the accuracy of the classifier as it determined whether a tweet was in German or English on the topic of David Hasselhoff, it was able to achieve 82.93% accuracy with the test data.  when we used training data as both the test and training data, we got an accuracy of 88.24%.  I imagine that this is due to the fact that the German training file has some English words.  also, in the English test file, one of the English tweets is actually in Spanish, which may have more German-ish letters in it, and four of the English tweets have German words or city names.
+
+2.  The accuracy is now only 52.38%.  I postulate that this is due to the fact that both datasets are in English, which means that many of the words are going to have the same letters.
+
+
+Extra Credit:
+
+In order to make this classifier more accurate, we switched from 1 letter pairs to 2 letter pairs.  this gave an accuracy of 89.0%.
+
+Next, we tried using both 1 and 2 letter pairs. which again gave us an accuracy of 89%.  Apparently the 2-letter pairs are much more definitive.
+
+Using only sets of 3 letters brought the accuracy down to 88.0%, perhaps because 3 letter sets are too specific.
+
+Next, we tried comparing the frequency of sets 2 and 3 letter pairs.  this raised the accuracy to 92.0%.
+
+Because adding 3 letter pairs helped so much, we tried adding 4 letter pairs.  This sort of broke the code, causing an error when it tried to calculate getPosteriorProbability,because some of the probabilities were too small. We decided not to pursue logarithmic functions to allow the calculations to be done.
+
+However, as we were deleting this code, we accidentally left two sets of 3 letter pair generators, as well as 2 letter pair generator and a 1 letter pair generator.  This caused the accuracy to rise to 95%, perhaps by weighting the results given by the 3 letter pairs, so we left it in.
+
+In the spirit of experiment, we decided to try implementing a third set of 3-letter pairs, to see if the accuracy would rise further, but this caused it to fall to 91%.  So, satisfied that 95% accuracy is probably better than the average american could achieve, we left well enough alone.
